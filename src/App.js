@@ -29,28 +29,30 @@ import Select from "./Components/Select";
 import Button from "./Components/Button";
 import { useState } from "react";
 function App() {
-  const [code, setCode] = useState();
+  const [code, setCode] = useState("EUR");
 
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState(0);
   const [result, setResult] = useState(0);
   const onClick = () => {
-    return fetch(
-      "https://api.nbp.pl/api/exchangerates/rates/c/" +
-        code +
-        "/today/?format=json"
-    )
+    fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${code}/?format=json`)
       .then((response) => response.json())
       .then((data) => {
-        setResult(`${(data.rates[0].bid * amount).toFixed(2)} PLN`);
+        setResult(`${(data.rates[0].mid * amount).toFixed(2)} PLN`);
       });
+  };
+  const onInputChange = (value) => {
+    setAmount(value);
+  };
+  const onSelectChange = (value) => {
+    setCode(value);
   };
   return (
     <div className="calculator">
-      <Input />
-      <Select />
+      <Input onChange={onInputChange} />
+      <Select onChange={onSelectChange} />
       <Button onClick={onClick} />
 
-      <span id="result">{result}</span>
+      <span>{result}</span>
     </div>
   );
 }

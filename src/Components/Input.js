@@ -1,4 +1,11 @@
-const Input = () => {
-  return <input type="number" id="number" min="0" className="nbr" />;
+const Input = ({ onChange }) => {
+  return (
+    <input
+      onChange={(event) => onChange(event.target.value)}
+      type="number"
+      min="0"
+      className="nbr"
+    />
+  );
 };
 export default Input;

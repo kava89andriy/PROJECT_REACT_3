@@ -14,3 +14,7 @@ body {
   padding: 40px;
   border-radius: 3px;
 }
+.button,
+.label {
+  margin: 0 10px;
+}

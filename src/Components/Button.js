@@ -1,6 +1,6 @@
 const Button = ({ onClick }) => {
   return (
-    <button onClick={onClick} className="button" id="convert">
+    <button onClick={onClick} className="button">
       convert
     </button>
   );
